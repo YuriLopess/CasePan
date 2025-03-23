@@ -24,17 +24,18 @@ namespace CasePan.Controllers
         }
 
         [HttpGet("GetUserById/{idUser}")]
-        public async Task<ActionResult<ResponseModel<List<UserModel>>>> GetUserById(Guid idUser)
+        public async Task<ActionResult<ResponseModel<UserModel>>> GetUserById(Guid idUser)
         {
             var user = await _userService.GetUserById(idUser);
             return Ok(user);
         }
 
         [HttpPost("SaveUser")]
-        public async Task<ActionResult<ResponseModel<UserModel>>> SaveUser(CreateUserDTO userDto)
+        public async Task<ActionResult<ResponseModel<UserModel>>> SaveUser([FromBody] CreateUserDTO userDto)
         {
-            var users = await _userService.SaveUser(userDto);
-            return Ok(users);
+            var user = await _userService.SaveUser(userDto);
+            return Ok(user);
         }
+
     }
 }

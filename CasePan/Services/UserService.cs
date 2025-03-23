@@ -75,13 +75,15 @@ namespace CasePan.Service
                 response.Data = await _context.Users.ToListAsync();
                 response.Message = "User successfully registered!";
 
-            } catch (Exception ex)
+                return response;
+            }
+            catch (Exception ex)
             {
                 response.Message = ex.Message;
                 response.Status = false;
                 return response;
             }
-
         }
+
     }
 }
