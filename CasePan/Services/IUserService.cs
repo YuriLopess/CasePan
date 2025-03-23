@@ -1,6 +1,11 @@
-﻿namespace CasePan.Service
+﻿using CasePan.Models;
+
+namespace CasePan.Service
 {
-    public interface AutorInterface
+    public interface IUserService    
     {
+        Task<ResponseModel<List<UserModel>>> GetAllUsers();
+        Task<ResponseModel<UserModel>> GetUserById(Guid userId);
+
     }
 }
