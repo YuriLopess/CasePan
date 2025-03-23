@@ -1,4 +1,5 @@
-﻿using CasePan.Models;
+﻿using CasePan.Data;
+using CasePan.Models;
 
 namespace CasePan.Service
 {
@@ -6,6 +7,7 @@ namespace CasePan.Service
     {
         Task<ResponseModel<List<UserModel>>> GetAllUsers();
         Task<ResponseModel<UserModel>> GetUserById(Guid userId);
+        Task<ResponseModel<List<UserModel>>> SaveUser(CreateUserDTO userDto);
 
     }
 }

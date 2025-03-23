@@ -1,4 +1,5 @@
-﻿using CasePan.Models;
+﻿using CasePan.Data;
+using CasePan.Models;
 using CasePan.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace CasePan.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService) 
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -22,5 +23,18 @@ namespace CasePan.Controllers
             return Ok(users);
         }
 
+        [HttpGet("GetUserById/{idUser}")]
+        public async Task<ActionResult<ResponseModel<List<UserModel>>>> GetUserById(Guid idUser)
+        {
+            var user = await _userService.GetUserById(idUser);
+            return Ok(user);
+        }
+
+        [HttpPost("SaveUser")]
+        public async Task<ActionResult<ResponseModel<UserModel>>> SaveUser(CreateUserDTO userDto)
+        {
+            var users = await _userService.SaveUser(userDto);
+            return Ok(users);
+        }
     }
 }

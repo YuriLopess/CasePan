@@ -32,9 +32,56 @@ namespace CasePan.Service
 
         }
 
-        public Task<ResponseModel<UserModel>> GetUserById(Guid userId)
+        public async Task<ResponseModel<UserModel>> GetUserById(Guid userId)
         {
-            throw new NotImplementedException();
+            ResponseModel<UserModel> response = new ResponseModel<UserModel>();
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(userDb => userDb.Id == userId);
+                if(user == null)
+                {
+                    response.Message = "No records found";
+                    return response;
+                }
+
+                response.Data = user;
+                response.Message = "Record found!";
+                return response;
+
+            } catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Status = false;
+                return response;
+            }
+        }
+
+        public async Task<ResponseModel<List<UserModel>>> SaveUser(CreateUserDTO userDTO)
+        {
+            ResponseModel<List<UserModel>> response = new ResponseModel<List<UserModel>>();
+
+            try
+            {
+                var user = new UserModel()
+                {
+                    Name = userDTO.Name,
+                    Email = userDTO.Email,
+                    Password = userDTO.Password
+                };
+
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+
+                response.Data = await _context.Users.ToListAsync();
+                response.Message = "User successfully registered!";
+
+            } catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Status = false;
+                return response;
+            }
+
         }
     }
 }
