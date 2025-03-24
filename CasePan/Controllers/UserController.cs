@@ -1,4 +1,5 @@
 ﻿using CasePan.Data;
+using CasePan.Dto;
 using CasePan.Models;
 using CasePan.Service;
 using Microsoft.AspNetCore.Http;
@@ -31,11 +32,25 @@ namespace CasePan.Controllers
         }
 
         [HttpPost("SaveUser")]
-        public async Task<ActionResult<ResponseModel<UserModel>>> SaveUser([FromBody] CreateUserDTO userDto)
+        public async Task<ActionResult<ResponseModel<List<UserModel>>>> SaveUser([FromBody] CreateUserDTO userDto)
         {
             var user = await _userService.SaveUser(userDto);
             return Ok(user);
         }
 
+        [HttpPut("EditUser")]
+        public async Task<ActionResult<ResponseModel<UserModel>>> EditUser(EditUserDto editUser)
+        {
+            var users = await _userService.EditUser(editUser);
+            return Ok(users);
+        }
+
+        [HttpDelete("DeleteUser")]
+        public async Task<ActionResult<ResponseModel<UserModel>>> DeleteUser(Guid idUser)
+        {
+            var users = await _userService.DeleteUser(idUser);
+            return Ok(users);
+        }
+ 
     }
 }
