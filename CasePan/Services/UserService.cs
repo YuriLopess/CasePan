@@ -1,6 +1,7 @@
 ﻿using CasePan.Data;
 using CasePan.Dto;
 using CasePan.Models;
+using CasePan.Validators;
 using Microsoft.EntityFrameworkCore;
 
 namespace CasePan.Service
@@ -45,6 +46,8 @@ namespace CasePan.Service
         public async Task<ResponseModel<UserModel>> EditUser(EditUserDto editUser)
         {
             ResponseModel<UserModel> response = new ResponseModel<UserModel>();
+            var userValidator = new UserValidator();
+
             try
             {
                 var user = await _context.Users.FirstOrDefaultAsync(userDb => userDb.Id == editUser.Id);
@@ -55,13 +58,16 @@ namespace CasePan.Service
                     return response;
                 }
 
+                userValidator.validatorName(editUser.Name);
+                userValidator.validatorPassword(editUser.Password);
+
                 user.Name = editUser.Name;
                 user.Password = editUser.Password;
 
                 _context.Update(user);
                 await _context.SaveChangesAsync();
 
-                response.Data = user; // Retornando o usuário editado
+                response.Data = user;
                 response.Message = "Record edited successfully";
                 return response;
             }
@@ -73,28 +79,24 @@ namespace CasePan.Service
             }
         }
 
-
-
-
         public async Task<ResponseModel<List<UserModel>>> GetAllUsers()
         {
-            ResponseModel<List<UserModel>> respose = new ResponseModel<List<UserModel>>();
+            ResponseModel<List<UserModel>> response = new ResponseModel<List<UserModel>>();
             try
             {
                 var users = await _context.Users.ToListAsync();
 
-                respose.Data = users;
+                response.Data = users;
+                response.Message = "All users have been listed";
+                return response;
 
-                respose.Message = "All users have been listed";
-                return respose;
-
-            } catch (Exception ex)
-            {
-                respose.Message = ex.Message;
-                respose.Status = false;
-                return respose;
             }
-
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Status = false;
+                return response;
+            }
         }
 
         public async Task<ResponseModel<UserModel>> GetUserById(Guid userId)
@@ -124,9 +126,14 @@ namespace CasePan.Service
         public async Task<ResponseModel<List<UserModel>>> SaveUser(CreateUserDTO userDTO)
         {
             ResponseModel<List<UserModel>> response = new ResponseModel<List<UserModel>>();
+            var userValidator = new UserValidator();
 
             try
             {
+                userValidator.validatorName(userDTO.Name);  
+                userValidator.validatorPassword(userDTO.Password);
+                userValidator.validatorEmail(userDTO.Email);
+
                 var user = new UserModel()
                 {
                     Name = userDTO.Name,
@@ -149,6 +156,5 @@ namespace CasePan.Service
                 return response;
             }
         }
-
     }
 }

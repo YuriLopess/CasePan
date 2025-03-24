@@ -20,12 +20,12 @@ namespace CasePan.Validators
 
             if (!password.Any(char.IsLower))
             {
-                throw new InvalidOperationException("Password must contain at least one lowercase letter.");
+                throw new UserValidationException("Password must contain at least one lowercase letter.");
             }
 
             if (!password.Any(char.IsDigit))
             {
-                throw new InvalidOperationException("Password must contain at least one digit.");
+                throw new UserValidationException("Password must contain at least one digit.");
             }
 
             if (!password.Any(c => "!@#$%^&*()".Contains(c)))
