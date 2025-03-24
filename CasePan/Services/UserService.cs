@@ -42,9 +42,9 @@ namespace CasePan.Service
             }
         }
 
-        public async Task<ResponseModel<List<UserModel>>> EditUser(EditUserDto editUser)
+        public async Task<ResponseModel<UserModel>> EditUser(EditUserDto editUser)
         {
-            ResponseModel<List<UserModel>> response = new ResponseModel<List<UserModel>>();
+            ResponseModel<UserModel> response = new ResponseModel<UserModel>();
             try
             {
                 var user = await _context.Users.FirstOrDefaultAsync(userDb => userDb.Id == editUser.Id);
@@ -61,18 +61,20 @@ namespace CasePan.Service
                 _context.Update(user);
                 await _context.SaveChangesAsync();
 
-                response.Data = await _context.Users.ToListAsync();
+                response.Data = user; // Retornando o usuário editado
                 response.Message = "Record edited successfully";
                 return response;
-
-
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 response.Message = ex.Message;
                 response.Status = false;
                 return response;
             }
         }
+
+
+
 
         public async Task<ResponseModel<List<UserModel>>> GetAllUsers()
         {

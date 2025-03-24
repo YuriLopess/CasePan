@@ -39,11 +39,12 @@ namespace CasePan.Controllers
         }
 
         [HttpPut("EditUser")]
-        public async Task<ActionResult<ResponseModel<UserModel>>> EditUser(EditUserDto editUser)
+        public async Task<ActionResult<ResponseModel<UserModel>>> EditUser([FromBody] EditUserDto editUser)
         {
             var users = await _userService.EditUser(editUser);
             return Ok(users);
         }
+
 
         [HttpDelete("DeleteUser")]
         public async Task<ActionResult<ResponseModel<UserModel>>> DeleteUser(Guid idUser)

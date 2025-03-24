@@ -12,7 +12,7 @@ namespace CasePan.Service
 
         Task<ResponseModel<List<UserModel>>> SaveUser(CreateUserDTO saveUser);
 
-        Task<ResponseModel<List<UserModel>>> EditUser(EditUserDto editUser);
+        Task<ResponseModel<UserModel>> EditUser(EditUserDto editUser);
 
         Task<ResponseModel<List<UserModel>>> DeleteUser(Guid userId);
 
