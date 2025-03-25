@@ -16,7 +16,7 @@ namespace CasePan.Controllers
         {
             _userService = userService;
         }
-
+    
         [HttpGet("GetAllUsers")]
         public async Task<ActionResult<ResponseModel<List<UserModel>>>> GetAllUsers()
         {

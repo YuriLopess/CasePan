@@ -4,12 +4,23 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c => {
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {
+        Title = "CasePan",
+        Version = "v1",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact {
+            Name = "YuriLopes",
+            Email = "costalopesyuri@gmail.com",
+            Url = new Uri("https://github.com/YuriLopess")
+        }
+    });
+
+    var xmlFile = "CasePan.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 builder.Services.AddScoped<IUserService, UserService>();
 
@@ -20,7 +31,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
