@@ -1,5 +1,6 @@
 ﻿namespace CasePan.Dto
 {
+    // Data Transfer Object (DTO) for editing an existing user
     public class EditUserDto
     {
         public Guid Id { get; set; }

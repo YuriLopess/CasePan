@@ -6,24 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {
-        Title = "CasePan",
-        Version = "v1",
-        Contact = new Microsoft.OpenApi.Models.OpenApiContact {
-            Name = "YuriLopes",
-            Email = "costalopesyuri@gmail.com",
-            Url = new Uri("https://github.com/YuriLopess")
-        }
-    });
+builder.Services.AddSwaggerGen();
 
-    var xmlFile = "CasePan.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
-});
-
+// Injects the IUserService implementation into the dependency container
 builder.Services.AddScoped<IUserService, UserService>();
 
+// Database configuration using PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -31,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 var app = builder.Build();
 
+// Configurations specific to the development environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -38,9 +27,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
+// Automatically maps controllers to API endpoints
 app.MapControllers();
 
 app.Run();

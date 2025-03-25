@@ -4,6 +4,7 @@ using CasePan.Models;
 using CasePan.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace CasePan.Controllers
 {
@@ -11,12 +12,15 @@ namespace CasePan.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        // Injecting the IUserService to handle business logic
         private readonly IUserService _userService;
+        
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
-    
+
+        // Endpoint to retrieve all users
         [HttpGet("GetAllUsers")]
         public async Task<ActionResult<ResponseModel<List<UserModel>>>> GetAllUsers()
         {
@@ -24,6 +28,7 @@ namespace CasePan.Controllers
             return Ok(users);
         }
 
+        // Endpoint to retrieve a user by their unique ID
         [HttpGet("GetUserById/{idUser}")]
         public async Task<ActionResult<ResponseModel<UserModel>>> GetUserById(Guid idUser)
         {
@@ -31,6 +36,7 @@ namespace CasePan.Controllers
             return Ok(user);
         }
 
+        // Endpoint to save a new user
         [HttpPost("SaveUser")]
         public async Task<ActionResult<ResponseModel<List<UserModel>>>> SaveUser([FromBody] CreateUserDTO userDto)
         {
@@ -38,6 +44,7 @@ namespace CasePan.Controllers
             return Ok(user);
         }
 
+        // Endpoint to update an existing user's information
         [HttpPut("EditUser")]
         public async Task<ActionResult<ResponseModel<UserModel>>> EditUser([FromBody] EditUserDto editUser)
         {
@@ -45,13 +52,12 @@ namespace CasePan.Controllers
             return Ok(users);
         }
 
-
+        // Endpoint to delete a user by their unique ID
         [HttpDelete("DeleteUser")]
         public async Task<ActionResult<ResponseModel<UserModel>>> DeleteUser(Guid idUser)
         {
             var users = await _userService.DeleteUser(idUser);
             return Ok(users);
         }
- 
     }
 }

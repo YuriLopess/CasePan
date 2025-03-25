@@ -6,6 +6,7 @@ namespace CasePan.Validators
 {
     public class UserValidator
     {
+        // Validates password according to security requirements
         public void validatorPassword(string password)
         {
             if (password.Length < 8)
@@ -34,6 +35,7 @@ namespace CasePan.Validators
             }
         }
 
+        // Validates name to ensure it meets character and length constraints
         public void validatorName(string name)
         {
             if (string.IsNullOrWhiteSpace(name) || name.Length < 8 || name.Length > 50)
@@ -47,6 +49,7 @@ namespace CasePan.Validators
             }
         }
 
+        // Validates email format and length
         public void validatorEmail(string email)
         {
             if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))

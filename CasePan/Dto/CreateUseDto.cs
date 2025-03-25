@@ -1,5 +1,6 @@
 namespace CasePan.Data
 {
+    // Data Transfer Object (DTO) for creating a new user
     public class CreateUserDTO
     {
         public string Name { get; set; } = string.Empty;
