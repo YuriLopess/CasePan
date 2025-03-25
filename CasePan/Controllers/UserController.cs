@@ -22,6 +22,7 @@ namespace CasePan.Controllers
 
         // Endpoint to retrieve all users
         [HttpGet("GetAllUsers")]
+        [ResponseCache(Duration = 300, Location = ResponseCacheLocation.Client)]
         public async Task<ActionResult<ResponseModel<List<UserModel>>>> GetAllUsers()
         {
             var users = await _userService.GetAllUsers();
