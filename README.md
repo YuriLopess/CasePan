@@ -2,99 +2,99 @@
 
 ![Image](https://github.com/user-attachments/assets/ac7013f7-42a3-4d6e-837d-9a9db8690165)
 
-<h2>Descrição:</h2>
+<h2>Description:</h2>
 
-Este projeto foi desenvolvido como parte do teste técnico para a vaga de Engenheiro de Software Júnior no Banco Pan.
+This project was developed as part of the technical test for the Junior Software Engineer position at Banco Pan.
 
-Trata-se de uma API que implementa operações CRUD (Create, Read, Update, Delete) e realiza a conexão com um banco de dados PostgreSQL. A API oferece endpoints para gerenciar usuários, permitindo a criação, atualização, exclusão e consulta de dados. O objetivo é fornecer uma estrutura robusta e eficiente para a manipulação dos dados dos usuários, com foco na simplicidade e escalabilidade das operações.
+It is an API that implements CRUD (Create, Read, Update, Delete) operations and connects to a PostgreSQL database. The API offers endpoints to manage users, allowing for data creation, updating, deletion, and querying. The goal is to provide a robust and efficient framework for handling user data, with a focus on simplicity and scalability of operations.
 
 
-<h2>Estrutura do projeto</h2>
+<h2>Project structure</h2>
 
-O projeto está organizado de forma a garantir clareza e escalabilidade. Abaixo está um resumo das principais pastas e arquivos:
+The project is organized in a way that ensures clarity and scalability. Below is a summary of the main folders and files:
 
-- **`Controllers/`**: Responsável por gerenciar as requisições HTTP e delegar as ações para os serviços correspondentes.
+- **`Controllers/`**: Responsible for managing HTTP requests and delegating actions to the corresponding services.  
 
-- **`Services/`**: Contém a lógica de negócios, implementando os métodos CRUD e outras operações relacionadas aos usuários.
+- **`Services/`**: Contains the business logic, implementing CRUD methods and other operations related to users.  
 
-- **`DTOs/`**: Define os objetos de transferência de dados utilizados para comunicação entre as camadas da aplicação.
+- **`DTOs/`**: Defines data transfer objects used for communication between application layers.  
 
-- **`Validators/`**: Contém as validações necessárias para garantir que os dados fornecidos sejam consistentes e válidos antes de serem processados.
+- **`Validators/`**: Contains the necessary validations to ensure that the provided data is consistent and valid before being processed.  
 
-- **`Exceptions/`**: Define as exceções personalizadas e o tratamento de erros para uma resposta clara e controlada em caso de falhas.
+- **`Exceptions/`**: Defines custom exceptions and error handling for a clear and controlled response in case of failures.  
 
-- **`Migrations/`**: Arquivos de migração para o banco de dados, gerenciando mudanças na estrutura do schema.
+- **`Migrations/`**: Database migration files, managing changes to the schema structure.  
 
-- **`Models/`**: Representa as entidades do banco de dados, como o modelo de Usuário.
+- **`Models/`**: Represents database entities, such as the User model.  
 
-- **`Data/`**: Contém a configuração de acesso ao banco de dados e a definição do contexto de dados, utilizando o Entity Framework para facilitar as operações de persistência.
+- **`Data/`**: Contains database access configuration and defines the data context, using Entity Framework to facilitate persistence operations.
 
-<h2>Endpoints da API</h2>
+<h2>API endpoints</h2>
 
-A API expõe os seguintes endpoints para gerenciar os usuários:
+The API exposes the following endpoints to manage users:
 
 - **`GET /api/user/GetAllUsers`**  
-Retorna todos os usuários cadastrados no sistema.
+  Returns all users registered in the system.
 
 - **`GET /api/user/GetUserById/{idUser}`**  
-  Retorna os detalhes de um usuário específico, identificado pelo seu ID.
+  Returns the details of a specific user, identified by their ID.
 
 - **`POST /api/user/SaveUser`**  
-  Cria um novo usuário a partir dos dados fornecidos no corpo da requisição.
+  Creates a new user based on the data provided in the request body.
 
 - **`PUT /api/user/EditUser`**  
-  Atualiza os dados de um usuário existente com base nas informações fornecidas.
+  Updates an existing user's data based on the provided information.
 
 - **`DELETE /api/user/DeleteUser`**  
-  Deleta um usuário do sistema, identificado pelo seu ID.
+  Deletes a user from the system, identified by their ID.
 
-<h2>Instalação:</h2>
+<h2>Installation:</h2>
 
-Para instalar o projeto, você pode baixá-lo como um arquivo .zip ou cloná-lo diretamente do GitHub.
+To install the project, you can download it as a .zip file or clone it directly from GitHub.
 
-### Baixar como .zip
+### Download as .zip
 
-1. Acesse o repositório no GitHub: [CasePan](https://github.com/YuriLopess/CasePan)
-2. Clique em "Code" e selecione "Download ZIP".
-3. Extraia o arquivo ZIP no diretório de sua escolha.
+1. Access the repository on GitHub: [CasePan](https://github.com/YuriLopess/CasePan)  
+2. Click on "Code" and select "Download ZIP".  
+3. Extract the ZIP file to your preferred directory.  
 
-### Clonar com Git
+### Clone with Git  
 
-1. Abra o terminal.
+1. Open the terminal.  
 
-2. Navegue até o diretório onde deseja clonar o repositório.
+2. Navigate to the directory where you want to clone the repository.  
 
-3. Execute o seguinte comando:
+3. Run the following command:  
 
    ```sh
    git clone https://github.com/YuriLopess/CasePan.git
-<h2>Pré-requisitos:</h2>
+<h2>Prerequisites:</h2>
 
-Antes de rodar o projeto, é necessário ter as seguintes ferramentas e tecnologias instaladas:
-
+Before running the project, it is necessary to have the following tools and technologies installed:
 
 - .NET 8
 - PostgreSQL
 - Entity Framework Core
-- Ferramentas para migração de banco de dados (Ex: EF Core CLI)
+- Tools for database migration (Ex: EF Core CLI)
 
 
-<h2>Rodando o Projeto Localmente:</h2>
+<h2>Running the Project Locally:</h2> 
 
-1. Clone o repositório para sua máquina local.
+1. Clone the repository to your local machine.
 
-2. Navegue até a pasta do projeto no terminal.
+2. Navigate to the project folder in the terminal.
 
-3. Configure a conexão com o banco de dados PostgreSQL no arquivo `appsettings.json`.
+3. Configure the connection to the PostgreSQL database in the `appsettings.json` file.
 
-4. Execute as migrações do banco de dados com o comando:
+4. Run the database migrations with the following command:
+
 
    ```sh
    dotnet ef database update
-5. Inicie o projeto com o comando:
+5. Start the project with the:
 
     ```sh
     dotnet run
-<h2>Contato:</h2>
+<h2>Contact:</h2>
 
-Caso tenha alguma dúvida ou queira discutir sobre o projeto, sinta-se à vontade para entrar em contato comigo através desse e-mail: **[costalopesyuri@gmail.com](mailto:costalopesyuri@gmail.com)**
+If you have any questions or want to discuss about the project, please feel free to contact me via this email: **[costalopesyuri@gmail.com](mailto:costalopesyuri@gmail.com)**
